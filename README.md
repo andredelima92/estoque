@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CakePHP Composer Skeleton
 
 Esqueleto de projeto do CakePHP instalado via Composer e com [DebugKit](https://github.com/cakephp/debug_kit) já instalado.
@@ -26,3 +27,7 @@ $ composer install
 
 * Renomeie o arquivo app/Config/database.php.default para app/Config/database.php
 
+=======
+# estoque
+Just learning
+>>>>>>> 8cbbae68cfdd30f82ae8fc917b9cdc36c848ee93
