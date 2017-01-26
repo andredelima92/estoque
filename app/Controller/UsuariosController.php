@@ -15,11 +15,7 @@ class UsuariosController extends AppController{
     echo $this->template->render(array('this' => new View($this), 'parametros' => $this->parametros));
     exit;
   }
-<<<<<<< Updated upstream
-  //Nova alteração
-=======
-  // teste de comentario para o git
->>>>>>> Stashed changes
+
   public function alterarSenha(){
     $this->isLogin();
     $this->init();
