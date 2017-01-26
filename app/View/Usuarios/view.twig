@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title>Usuários :: Listar</title>
+	</head>
+	<body>
+		<h1>Listar Usuários</h1>
+		{{ parametros.msg | raw }}
+		<hr>
+    {{ this.Form.create(false, {'url': 'view','type': 'get'}) | raw }}
+			<select name="busca">
+				<option value="nome">Procurar por Nome</option>
+				<option value="username">Procurar por E-mail</option>
+			</select>
+    {{ this.Form.input('word', {'label': '', 'div': false}) | raw }}
+			<label>Perfil</label>
+			<select name="perfil">
+				<option value="">Todos</option>
+				<option value="admin">Admin</option>
+				<option value="user">Funcionário</option>
+			</select>
+			<label>Ordenar por</label>
+			<select name="ordenar">
+				<option value="id">Id</option>
+				<option value="nome">Nome</option>
+				<option value="username">E-mail</option>
+			</select>			
+			<input type="submit" value="Buscar">
+			<input type="reset" value="Limpar">
+		</form>
+		<hr>
+		<p>
+      {{ this.Html.link('Inserir Usuário', {'action': 'add'}) | raw }}&nbsp;      
+      {{ this.Html.link('Voltar', {'controller': 'homes', 'action': 'index'}) | raw }}
+    </p>
+		<table border="1">
+			<tr>
+				<td>Id</td>
+				<td>Usuário</td>
+				<td>E-mail</td>
+				<td>Perfil</td>
+				<td>Ações</td>
+			<tr>
+			{% for list in parametros.usuarios %}
+				<tr>
+					<td>{{ list.Usuario.id }}</td>
+					<td>{{ list.Usuario.nome }}</td>
+					<td>{{ list.Usuario.username }}</td>
+					<td>
+						{% if list.Usuario.role == 'admin' %}
+							Administrador
+						{% else %}
+							Funcionário
+						{% endif %}
+					</td>
+					<td>
+            {{ this.Html.link('Alterar', {'action': 'add/' ~ list.Usuario.id}) | raw }} &nbsp;
+            {{ this.Form.postLink('Excluir', {'action': 'delete/' ~ list.Usuario.id}, {'confirm': 'Deseja realmente excluir o usuario ' ~ list.usuario.nome}) | raw }}
+          </td>
+				</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>

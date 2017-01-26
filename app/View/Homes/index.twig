@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Controle de Estoque</title>
+	</head>
+	<body>
+		<h1>Controle de Estoque</h1>
+		{{ parametros.msg | raw }}
+		<hr>
+		<li>
+			{% if parametros.isAdmin %}
+        <ul>{{ this.Html.link('Cadastrar Usuário', {'controller': 'usuarios', 'action': 'add'}) | raw }}</ul>
+        <ul>{{ this.Html.link('Listar Usuários', {'controller': 'usuarios', 'action': 'view'}) | raw }}</ul>
+			{% endif %}
+      <ul>{{ this.Html.link('Alterar Senha', {'controller': 'usuarios', 'action': 'alterarSenha'}) | raw }}</ul>
+      <ul>{{ this.Html.link('Cadastrar Produto', {'controller': 'produtos', 'action': 'add'}) | raw }}</ul>
+      <ul>{{ this.Html.link('Listar Produtos', {'controller': 'produtos', 'action': 'index'}) | raw }}</ul>
+      <ul>{{ this.Html.link('Controler de Estoque', {'controller': 'estoques', 'action': 'index'}) | raw }}</ul>
+      <ul>{{ this.Html.link('Sair', {'controller': 'usuarios', 'action': 'logout'}) | raw }}</ul>
+		</li>
+	</body>
+</html>

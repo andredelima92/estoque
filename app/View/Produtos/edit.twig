@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<title>Produtos :: Alterar</title>
+	</head>
+	<body>
+		<h1>Alterar Produto</h1>
+		<h3>Produto #{{ parametros.produto.id }}</h3>
+		<hr>
+    {{ this.Form.create('', {'url': 'edit'}) | raw }}
+      {{ this.Form.input('id', {'type': 'hidden', 'value': parametros.produto.id}) | raw }}
+		  {{ this.Form.input('nome', {'label': 'Nome:','value': parametros.produto.nome, 'maxlength': '100', 'required': 'true'}) | raw }}<br>
+			<label>Quantidade:</label>
+			{{ parametros.produto.quantidade }}<hr>
+    {{ this.Form.end('Atualizar') | raw }}
+    {{ this.Html.link('Cancelar', {'action': 'index'}) | raw }}
+
+		<h3>Movimento Estoque</h3>
+		<table border="1">
+			<tr>
+				<td>Data</td>
+				<td>Usuário</td>
+				<td>Quantidade</td>
+			</tr>
+		{% for list in parametros.estoques %}
+			{% set class = '' %}
+			{% if list.Estoque.quantidade > 0 %}
+				{% set class = "style=color:green" %}
+			{% elseif list.Estoque.quantidade < 0 %}
+				{% set class = "style=color:red" %}
+			{% endif %}
+			<tr {{ class }}>
+				<td {{ class }}>{{ list.Estoque.created | date('d/m/Y H:i:s') }}</td>
+				<td {{ class }}>{{ list.Usuario.nome }}</td>
+				<td {{ class }}>
+				{% if list.Estoque.quantidade > 0 %}
+				  +
+				{% endif %}
+				{{ list.Estoque.quantidade }}
+				</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</body>
+</html>

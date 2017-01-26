@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>Usuários :: Alterar Senha</title>
+	</head>
+	<body>
+		<h1>Alterar Senha</h1>
+		<h3>Usuário #{{ parametros.usuario.nome }} - {{ parametros.usuario.username }} [ {{ parametros.usuario.role }} ]</h3>
+		{{ parametros.msg | raw }}
+		<hr>
+    {{ this.Form.create(false, {'url': 'alterarSenha', 'type': 'post'}) | raw }}
+      {{ this.Form.input('id', {'type': 'hidden', 'value': parametros.usuario.id}) | raw }}
+		  {{ this.Form.input('password', {'label': 'Informa a senha: ', 'required': 'true'}) | raw }} <br>
+      {{ this.Form.input('password_confirm', {'label': 'Confirme a senha: ', 'required': 'true', 'type': 'password'}) | raw }} <hr>
+		{{ this.Form.end('Alterar Senha') | raw }}
+		{{ this.Html.link('Voltar', {'controller': 'homes', 'action': 'index'}) | raw }}
+	</body>
+</html>

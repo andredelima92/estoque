@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title>Usuários :: inserir</title>
+	</head>
+	<body>
+		<h1>Novo Usuário</h1>
+		{{ parametros.msg | raw }}
+		<hr>
+    {{ this.Form.create(false, {'url': 'add'}) | raw }}
+    {{ this.Form.input('id', {'value': parametros.usuario.id, 'type': 'hidden'}) | raw}}
+    {{ this.Form.input('nome', {'label': 'Nome: ', 'maxlength': '100', 'required': true, 'value': parametros.usuario.nome}) | raw }}
+    {{ this.Form.input('username', {'label': 'E-mail: ', 'required': true, 'value': parametros.usuario.username, 'type': 'email'}) | raw }}
+    {{ this.Form.input('password', {'label': 'Informe a senha: ', 'required': true, 'value': parametros.usuario.password}) | raw }}
+    {{ this.Form.input('password_confirm', {'label': 'Confirme a senha: ', 'required': true, 'type': 'password', 'value': parametros.usuario.password}) | raw }}
+			<label>Perfil:</label>
+			<select name="role">
+				<option value="admin" {% if parametros.usuario.role == 'admin' %} selected="selected" {% endif %}>Administrador</option>
+				<option value="user"  {% if parametros.usuario.role == 'user' %} selected="selected" {% endif %}>Funcionário</option>
+			</select><hr>
+    {{ this.Form.end('Salvar') | raw }}
+      {{ this.Html.link('Voltar', {'action': 'view'}) | raw }}
+		</form>
+	</body>
+</html>

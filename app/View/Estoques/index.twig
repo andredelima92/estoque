@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Estoques :: Controle</title>
+	</head>
+	<body>
+		<h1>Controle de Estoque</h1>
+		{% if parametros.msg %}
+			<h3>{{ parametros.msg | raw }}</h3>
+		{% endif %}
+		<hr>
+    {{ this.Form.create('',{'url': 'index'}) | raw }}
+			<table border="1">
+				<tr>
+					<td>Id</td>
+					<td>Produto</td>
+					<td>Estoque Atual</td>
+					<td>+/-</td>
+				<tr>
+				{% for list in parametros.produtos %}
+        {{ this.Form.input('prod' ~ list.Produto.id ~'usuario_id',{'type': 'hidden', 'value': parametros.usuario.id}) | raw }}
+        {{ this.Form.input('prod' ~ list.Produto.id ~'produto_id',{'type': 'hidden', 'value': list.Produto.id}) | raw }}
+				<tr>
+					<td>{{ list.Produto.id }}</td>
+					<td>{{ list.Produto.nome }}</td>
+					<td>{{ list.Produto.quantidade }}</td>
+          <td>{{ this.Form.input('prod' ~ list.Produto.id ~'quantidade',{'label': '', 'value': 0}) | raw }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			<hr>
+      {{ this.Form.end('Gravar') | raw }}
+      {{ this.Html.link('Cancelar', {'controller': 'homes', 'action': 'index'}) | raw }}
+	</body>
+</html>

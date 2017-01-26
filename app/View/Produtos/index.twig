@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>Produtos :: Listar</title>
+	</head>
+	<body>
+		<h1>Listar Produtos</h1>
+		{{ parametros.msg | raw }}
+		<hr>
+    {{ this.Form.create(false, {'type': 'get'}) | raw }}
+			<label>Procurar por nome:</label>
+    {{ this.Form.input('nome', {'label': '' ,'maxlength': '100', 'div': false}) | raw }}
+    {{ this.Form.button('Limpar', {'type': 'reset', 'div': false}) | raw }}
+		{{ this.Form.end('Buscar', {'div': false}) | raw }}
+		</form>
+		<hr>
+		<p>{{ this.Html.link('Inserir Produto', {'action': 'add'}) | raw }}
+      &nbsp;
+      {{ this.Html.link('Voltar', {'controller': 'homes'}) | raw }}
+    </p>
+		<table border="1">
+			<tr>
+				<td>Id</td>
+				<td>Produto</td>
+				<td>Quantidade</td>
+				<td colspan="2">Ações</td>
+			<tr>
+			{% for lista in parametros.produtos %}
+				<tr>
+					<td>{{ lista.Produto.id }}</td>
+					<td>{{ lista.Produto.nome }}</td>
+					<td>{{ lista.Produto.quantidade }}</td>
+          <td>{{ this.Html.link('Editar',  {'action': "edit/" ~ lista.Produto.id}) | raw }} </td>
+          <td>{{ this.Form.postLink('Excluir', {'action': "delete/" ~ lista.Produto.id}, {'confirm': 'Deseja realmente excluir este registro?'}) | raw }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<title>Controle de Estoque</title>
+	</head>
+	<body>
+		<h1>Acesso ao Sistema</h1>
+		{{ parametros.msg | raw }}
+		<hr>
+    {{this.Form.create('',{'url': 'login', 'type': 'get'}) | raw}}
+    {{this.Form.input('username', {'label': 'Informe o e-mail: ', 'required': 'true', 'id': 'username', 'div': false}) | raw}}
+    <input type="checkbox" id="salvarUser">Lembrar?
+    {{this.Form.input('password', {'label': 'Informa a senha: ', 'required': 'true', 'id': 'password'}) | raw}}
+		<hr>
+    {{this.Form.end('Login') | raw}}
+		</form>
+  <script>
+    //Valida os dados quando a pagina é carregada, caso exiat cache ele passa o username no formulario
+    window.addEventListener('load', function(){
+      if (typeof(Storage) !== "undefined") {
+        if(localStorage.getItem('user') === null){
+          document.getElementById('salvarUser').checked = false;
+        }else{
+          document.getElementById('salvarUser').checked = true;
+          if(localStorage.getItem('user') !== '')
+            document.getElementById('username').value = localStorage.getItem('user');
+          }
+      }else{
+        alert('Seu browser não suporta localstorage');
+        document.getElementById('salvarUser').checked = false;
+      }  
+    });
+
+    //Grava o cache se as condições forem atendidas
+    var gravarCache = function(){
+        document.getElementById('password').focus();
+      if(document.getElementById('salvarUser').checked){
+        if (typeof(Storage) !== "undefined") {
+          localStorage.setItem("user", document.getElementById('username').value);
+        }else{
+          alert('Seu browser não suporta localstorage');
+          document.getElementById('salvarUser').checked = false;
+        }
+      }else{
+        localStorage.removeItem('user');
+      }
+    }
+    
+    // Eventos que chamam a função de gravar o cache ao clicar no botao ou sair do campo username
+    document.getElementById('username').addEventListener('blur', function(){gravarCache();});
+    document.getElementById('salvarUser').addEventListener('click', function(){gravarCache();});
+  </script>
+	</body>
+</html>
