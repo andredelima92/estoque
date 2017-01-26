@@ -38,7 +38,7 @@ class EstoquesController extends AppController{
         
         $i++;
       }
-      
+      // alterei algo no arquivo
       foreach($dados as $value){
         if($value['quantidade'] <> 0){
           $this->request->data = $value;
