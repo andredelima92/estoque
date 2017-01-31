@@ -1,6 +1,7 @@
 <?php
 
-class ProdutoModel extends AppModel{
+class ProdutoModel extends AppModel
+{
   public $name = 'Produto';
   public $hasMany = array('Estoque');
   
