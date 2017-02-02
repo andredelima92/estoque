@@ -1,6 +1,7 @@
 <?php
 
-class UsuarioModel extends AppModel{
+class UsuarioModel extends AppModel
+{
   public $name = 'Usuario';
   public $hasMany = array('Estoque');
   
